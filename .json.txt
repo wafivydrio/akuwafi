@@ -1,0 +1,163 @@
+[{
+"nama obat" : "panadol",
+"harga" : 10000,
+"deskripsi" : "Obat untuk sakit kepala"
+"photo" : "https://i.imgur.com/GenbVx9.jpeg"
+},
+{
+"nama obat" : "Antangin",
+"harga" : 5000,
+"desc" : "Obat untuk masuk angin"
+"photo" : "https://imgur.com/a/TtEsDwl"
+},
+{
+"nama obat" : "Ibuprofen",
+"harga" : 8500,
+"desc" : "Obat untuk meredakan pusing"
+"photo" : "https://imgur.com/a/TtEsDwl"
+},
+{
+"nama obat" : "Antasida",
+"harga" : 7000,
+"desc" : "Obat untuk asam lambung"
+"photo" : "https://imgur.com/g8sCTxT"
+}]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package com.example.uas.databasee;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+
+public class Dtbse extends SQLiteOpenHelper {
+
+    Context context;
+    public static String Dtbse_NAME = "Dtbse.db";
+    public static int DTBSE_VERSION = 1;
+    public static String OBAT_ID = "id";
+    public static String TABLE_OBAT = "OBAT";
+    public static String NAMA_OBAT = "nama";
+    public static String DESK_OBAT = "deskripsi";
+    public static String HARGA_OBAT = "harga";
+    public static String GAMBAR_OBAT= "gambar";
+
+
+
+    public static String TABLE_USER = "user";
+    public static String ID_USER = "id";
+    public static String USERNAME_USER = "username";
+    public static String PASSWORD_USER = "pass";
+
+
+    public Dtbse(@Nullable Context context) {
+        super(context, Dtbse_NAME, null, DTBSE_VERSION);
+    }
+
+
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+        String queryObat=" CREATE TABLE "+TABLE_OBAT
+                +" ( "+OBAT_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + NAMA_OBAT + " VARCHAR(255), "
+                + DESK_OBAT + " VARCHAR(255), "
+                + HARGA_OBAT + " INTEGER, "
+                + GAMBAR_OBAT + " TEXT);";
+
+        String queryUsers = " CREATE TABLE " + TABLE_USER
+                + " ( " + ID_USER + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + USERNAME_USER + " VARCHAR(255), "
+                + PASSWORD_USER + " VARCHAR(255));";
+
+        sqLiteDatabase.execSQL(queryObat);
+        sqLiteDatabase.execSQL(queryUsers);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS OBAT");
+        onCreate(sqLiteDatabase);
+
+    }
+
+
+    public void masukinObat(String namaObat, String deskripsiObat, int hargaObat, String gambarObat) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(NAMA_OBAT, namaObat);
+        cv.put(DESK_OBAT, deskripsiObat);
+        cv.put(GAMBAR_OBAT, gambarObat);
+        cv.put(HARGA_OBAT, hargaObat);
+        long result = sqLiteDatabase.insert(TABLE_OBAT, null, cv);
+        if (result == -1) {
+            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+        }
+
+        
+        public void insertUser(String username, String password){
+            SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put(USERNAME_USER, username);
+            cv.put(PASSWORD_USER, password);
+            long result = sqLiteDatabase.insert(TABLE_USER,null,cv);
+            if (result == -1){
+                Toast.makeText(context,"failed", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        
+
+
+        
+        public Boolean checkUser (String username, String password){
+            SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+            Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM "+TABLE_USERS+" WHERE "+USERS_EMAIL+" = ? AND "+USERS_PASSWORD+" = ?", new String[] {username,password});
+            if (cursor.getCount()>0)
+                return true;
+            else
+                return false;
+        }
+
+
+
+    }
+
+
+    
+
+
+
+
+
+    }
+}
