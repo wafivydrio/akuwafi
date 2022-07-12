@@ -1,25 +1,25 @@
 [{
 "nama obat" : "panadol",
 "harga" : 10000,
-"deskripsi" : "Obat untuk sakit kepala"
+"deskripsi" : "Obat untuk sakit kepala",
 "photo" : "https://i.imgur.com/GenbVx9.jpeg"
 },
 {
 "nama obat" : "Antangin",
 "harga" : 5000,
-"desc" : "Obat untuk masuk angin"
+"desc" : "Obat untuk masuk angin",
 "photo" : "https://imgur.com/a/TtEsDwl"
 },
 {
 "nama obat" : "Ibuprofen",
 "harga" : 8500,
-"desc" : "Obat untuk meredakan pusing"
+"desc" : "Obat untuk meredakan pusing",
 "photo" : "https://imgur.com/a/TtEsDwl"
 },
 {
 "nama obat" : "Antasida",
 "harga" : 7000,
-"desc" : "Obat untuk asam lambung"
+"desc" : "Obat untuk asam lambung",
 "photo" : "https://imgur.com/g8sCTxT"
 }]
 
